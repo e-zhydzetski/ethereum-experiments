@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ETHPrice</title>
+    <script type="module">
+        import { ethers } from "./ethers-5.2.esm.min.js";
+        var url = 'https://kovan.infura.io/v3/c4b37c18ba204740a81ed8959a77890f';
+        var provider = new ethers.providers.JsonRpcProvider(url);
+        var address  = '0x1F5Da3E1eF41aF7BEC5A308cfd41b31780801d66';
+        var abi = [
+            {
+                "inputs": [],
+                "stateMutability": "nonpayable",
+                "type": "constructor"
+            },
+            {
+                "inputs": [],
+                "name": "getLatestPrice",
+                "outputs": [
+                    {
+                        "internalType": "int256",
+                        "name": "",
+                        "type": "int256"
+                    }
+                ],
+                "stateMutability": "view",
+                "type": "function"
+            }
+        ];
+        var contract = new ethers.Contract(address,abi,provider);
+
+        contract.getLatestPrice().then((result) =>{
+            console.log("$" +result.toNumber()/100000000);
+        });
+
+        // console.log(await provider.getBlockNumber());
+    </script>
+</head>
+<body>
+
+</body>
+</html>
