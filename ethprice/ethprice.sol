@@ -11,13 +11,7 @@ contract ethprice {
     }
 
     function getLatestPrice() public view returns (int) {
-        (
-            uint80 _roundID, 
-            int price,
-            uint _startedAt,
-            uint _timeStamp,
-            uint80 _answeredInRound
-        ) = priceFeed.latestRoundData();
+        (,int price,,,) = priceFeed.latestRoundData();
         return price;
     }
 }
