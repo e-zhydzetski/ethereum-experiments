@@ -83,8 +83,8 @@ async function main() {
             // f0 and f1 calculated correctly only if current price is within position, TODO make universal func
             const f0 = (await pool.feeGrowthGlobal0X128()).sub(tickL.feeGrowthOutside0X128).sub(tickU.feeGrowthOutside0X128);
             const f1 = (await pool.feeGrowthGlobal1X128()).sub(tickL.feeGrowthOutside1X128).sub(tickU.feeGrowthOutside1X128);
-            const xFee = f0.sub(position.feeGrowthInside0LastX128).mul(l).div(q128);
-            const yFee = f1.sub(position.feeGrowthInside1LastX128).mul(l).div(q128);
+            const xFee = nftPos.tokensOwed0.add(f0.sub(nftPos.feeGrowthInside0LastX128).mul(l).div(q128));
+            const yFee = nftPos.tokensOwed1.add(f1.sub(nftPos.feeGrowthInside1LastX128).mul(l).div(q128));
             console.log("x fee:", xFee);
             console.log("y fee:", yFee);
         }
